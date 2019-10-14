@@ -5,6 +5,7 @@ import (
 )
 
 //带头结点的逆序
+//就地逆序,time O(n),space O(1)
 func Reverse(node *LNode) {
 	if node == nil || node.Next == nil {
 		return
@@ -26,6 +27,24 @@ func Reverse(node *LNode) {
 		next = cur
 	}
 	node.Next = pre
+}
+
+//递归逆序
+func RecursiveReverseChild(node *LNode) *LNode {
+	if node == nil || node.Next == nil {
+		return node
+	}
+	newHead := RecursiveReverseChild(node.Next)
+	node.Next.Next = node
+	node.Next = nil
+	return newHead
+}
+
+func RecursiveReverse(node *LNode) {
+	firstNode := node.Next
+	//递归调用
+	newHead := RecursiveReverseChild(firstNode)
+	node.Next = newHead
 }
 
 func main() {
