@@ -47,6 +47,25 @@ func RecursiveReverse(node *LNode) {
 	node.Next = newHead
 }
 
+//插入法
+func InsertReverse(node *LNode) {
+	if node == nil || node.Next == nil {
+		return
+	}
+	var cur *LNode
+	var next *LNode
+	cur = node.Next.Next
+	//设置链表的第一个节点为尾节点
+	node.Next.Next = nil
+	//把遍历到的节点插入到头节点后面
+	for cur != nil {
+		next = cur.Next
+		cur.Next = node.Next
+		node.Next = cur
+		cur = next
+	}
+}
+
 func main() {
 
 }
